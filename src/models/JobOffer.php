@@ -1,7 +1,7 @@
 <?php
-include_once("DB.php");
+include_once("DBModel.php");
 
-class JobOffer {
+class JobOffer extends DBModel {
 	public const TABLE_NAME = "job_offers";
 	public const TABLE_COLUMNS = array("title " . DB::STRING_TYPE, "description " . DB::STRING_TYPE, "company " . DB::STRING_TYPE, "salary " . DB::FLOAT_TYPE);
 
@@ -10,9 +10,10 @@ class JobOffer {
 	public string $company;
 	public float $salary;
 
-	private DB $db;
-
-	function __construct(DB $db) {
-		$this->db = $db;
+	function __construct(string $title, string $description, string $company, float $salary) {
+		$this->title = $title;
+		$this->description = $description;
+		$this->company = $company;
+		$this->salary = $salary;
 	}
 }

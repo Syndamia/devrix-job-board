@@ -1,6 +1,6 @@
 <p>Hello World!</p>
 <?php
-	include_once("models/DB.php");
+	include_once("models/JobOffer.php");
 
-	$db = new DB();
+	$jb = new JobOffer("a", "", "", 0);
 ?>
