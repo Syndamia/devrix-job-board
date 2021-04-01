@@ -15,5 +15,7 @@ class JobOffer extends DBModel {
 		$this->description = $description;
 		$this->company = $company;
 		$this->salary = $salary;
+
+		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS);
 	}
 }
