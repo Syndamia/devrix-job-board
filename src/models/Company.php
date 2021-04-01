@@ -1,5 +1,5 @@
 <?php
-include_once("DBModel.php");
+include_once("models/DBModel.php");
 
 class Company extends DBModel {
 	public string $name;

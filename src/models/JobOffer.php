@@ -1,6 +1,6 @@
 <?php
-include_once("DBModel.php");
-include_once("Company.php");
+include_once("models/DBModel.php");
+include_once("models/Company.php");
 
 /**
  * Model that contains the required JobOffer properties. It also contains the request methods to the job_offers table.
