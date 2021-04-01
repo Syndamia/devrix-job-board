@@ -1,4 +1,7 @@
 <?php
+/**
+ * The model that has the database functionality. DO NOT instantiate this class! If you need an instance, extend the DBModel class!
+ */
 class DB {
 	private static $servername = "localhost";
 	private static $username = "root";
@@ -12,6 +15,7 @@ class DB {
 	private PDO $connection;
 
 	function __construct() {
+		// Try to connect
 		try {
 			$this->connection = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -25,12 +29,21 @@ class DB {
 
 		$this->connection->exec($createDBQuery);
 
-		// Make the actual connection to the database
+		// Connect to the actual database
 		$this->connection->exec("USE " . self::$dbname);
 	}
 
 	/* Create */
 
+	/**
+	 * Creates a table, with the given name and given column information.
+	 * **WARNING**: The method also creates an auto-incremented int id column, **DO NOT** specify it!
+	 *
+	 * @param string[] $columns
+	 * Represents the column information. Each value must be like: "column_name data_type", where the data_type should be taken
+	 * from the constant values of DB class.
+	 * Example value: array("first_name " . DB::STRING_TYPE, "age " . DB::INTEGER_TYPE, "income " . DB::FLOAT_TYPE)
+	 */
 	function createTable(string $tableName, array $columns) {
 		$query = "CREATE TABLE IF NOT EXISTS {$tableName}(
 				  id INT NOT NULL AUTO_INCREMENT,";
@@ -49,6 +62,14 @@ class DB {
 		}
 	}
 
+	/**
+	 * Inserts a value in a given table.
+	 *
+	 * @param string[] $values
+	 * Represents the data that should be inserted. The values should be ordered the same way the table columns are ordered.
+	 * Example: "John", 20, 2000.3
+	 * **WARNING**: DO NOT insert the id value
+	 */
 	function insertValue(string $tableName, ...$values) {
 		$query = "INSERT INTO {$tableName} VALUES(NULL, ";
 
@@ -74,6 +95,9 @@ class DB {
 
 	/* Read */
 
+	/**
+	 * Returns the next value that has the given id.
+	 */
 	function getById(string $tableName, int $id) {
 		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}` WHERE id = {$id}");
 		$sth->execute();
@@ -81,6 +105,9 @@ class DB {
 		return $sth->fetch(PDO::FETCH_OBJ);
 	}
 
+	/**
+	 * Returns all values inside a table.
+	 */
 	function getAllValues(string $tableName) {
 		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
 		$sth->execute();
@@ -90,6 +117,13 @@ class DB {
 
 	/* Update */
 
+	/**
+	 * Updates the value with the given id inside the specified table.
+	 *
+	 * @param string[] $values
+	 * Represents the data that should be updated. There should always be an even amount of data, where you alternate the column name and column value.
+	 * Example: "first_name", "John", "age", 20, "income", 2000.3
+	 */
 	function updateById(string $tableName, int $id, ...$values) {
 		$query = "UPDATE {$tableName} SET ";
 
@@ -110,6 +144,9 @@ class DB {
 
 	/* Delete */
 
+	/**
+	 * Deletes the value with the given id inside the given table.
+	 */
 	function deleteById(string $tableName, int $id) {
 		try {
 			$this->connection->exec("DELETE FROM {$tableName} WHERE id = {$id}");

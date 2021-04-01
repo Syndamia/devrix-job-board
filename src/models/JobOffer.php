@@ -1,6 +1,9 @@
 <?php
 include_once("DBModel.php");
 
+/**
+ * Model that contains the required JobOffer properties. It also contains the request methods to the job_offers table.
+ */
 class JobOffer extends DBModel {
 	public const TABLE_NAME = "job_offers";
 	public const TABLE_COLUMNS = array("title " . DB::STRING_TYPE, "description " . DB::STRING_TYPE, "company " . DB::STRING_TYPE, "salary " . DB::FLOAT_TYPE);
@@ -22,6 +25,8 @@ class JobOffer extends DBModel {
 	/* Create */
 
 	/**
+	 * Inserts the giveb JobOffer into the databse. The id is automatically generated in the database.
+	 *
 	 * @param JobOffer $jb
 	 */
 	static function insertIntoDB($jb) {
@@ -31,6 +36,8 @@ class JobOffer extends DBModel {
 	/* Read */
 
 	/**
+	 * Returns the JobOffer with the given id from the database.
+	 *
 	 * @return JobOffer
 	 */
 	static function getFromDBById(int $id) {
@@ -38,6 +45,8 @@ class JobOffer extends DBModel {
 	}
 
 	/**
+	 * Returns all JobOffers from the database.
+	 *
 	 * @return JobOffer[]
 	 */
 	static function getAllFromDB() {
@@ -47,6 +56,9 @@ class JobOffer extends DBModel {
 	/* Update */
 
 	/**
+	 * Updates the given JobOffer from the database.
+	 * **WARNING**: the JobOffer **MUST** have it's database id.
+	 *
 	 * @param JobOffer $jb
 	 */
 	static function updateFromDB($jb) {
@@ -55,6 +67,9 @@ class JobOffer extends DBModel {
 
 	/* Delete */
 
+	/**
+	 * Deletes the JobOffer with the given id from the database.
+	 */
 	static function deleteFromDB(int $id) {
 		self::$DB->deleteById(self::TABLE_NAME, $id);
 	}

@@ -8,15 +8,4 @@
 		echo "{$obj->id} {$obj->title}<br>";
 	}
 	echo "<br>";
-
-	$gottenjb = JobOffer::getFromDBById(1);
-	echo $gottenjb->title;
-
-	$gottenjb->title = "Something even newer";
-	echo $gottenjb->title;
-	JobOffer::updateFromDB($gottenjb);
-	$secgot = JobOffer::getFromDBById(1);
-	echo $secgot->title;
-
-	JobOffer::deleteFromDB(3);
 ?>
