@@ -7,14 +7,12 @@ include_once("controllers/LandingController.php");
  * Thanks https://www.taniarascia.com/the-simplest-php-router/
  */
 
-$landingController = new LandingController();
-
 $request = $_SERVER['REQUEST_URI'];
 
 switch ($request) {
 	case "":
 	case "/":
-		$landingController->invoke();
+		LandingController::invoke();
 		break;
 	default:
 		http_response_code(404);
