@@ -1,3 +1,5 @@
+<?php require "document-top.php"; ?>
+
 <p>Hello World!</p>
 <?php
 	include_once("models/JobOffer.php");
@@ -9,3 +11,5 @@
 	}
 	echo "<br>";
 ?>
+
+<?php require "document-bot.php"; ?>
