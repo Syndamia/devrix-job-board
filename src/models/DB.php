@@ -71,7 +71,6 @@ class DB {
 
 		$query = rtrim($query, ", ");
 		$query .= ");";
-		echo $query;
 
 		try {
 			$this->connection->exec($query);

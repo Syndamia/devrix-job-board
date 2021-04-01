@@ -1,15 +1,25 @@
 <?php require "document-top.php"; ?>
 
-<p>Hello World!</p>
 <?php
-	include_once("models/JobOffer.php");
+include_once("controllers/LandingController.php");
 
-	$jb = new JobOffer("Test", "A test", "TheTest", 11);
-	// JobOffer::insertInDB($jb);
-	foreach(JobOffer::getAllFromDB() as $key => $obj) {
-		echo "{$obj->id} {$obj->title}<br>";
-	}
-	echo "<br>";
+/* The landing page practically acts as our page router 
+ * Thanks https://www.taniarascia.com/the-simplest-php-router/
+ */
+
+$landingController = new LandingController();
+
+$request = $_SERVER['REQUEST_URI'];
+
+switch ($request) {
+	case "":
+	case "/":
+		$landingController->invoke();
+		break;
+	default:
+		http_response_code(404);
+		break;
+}
 ?>
 
 <?php require "document-bot.php"; ?>
