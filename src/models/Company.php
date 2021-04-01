@@ -2,16 +2,20 @@
 include_once("DBModel.php");
 
 class Company extends DBModel {
-	public const TABLE_NAME = "companies";
-	public const TABLE_COLUMNS = array(
-		"name " . DB::STRING_TYPE,
-	);
-
 	public string $name;
 
 	function __construct(string $name) {
 		$this->name = $name;
 	}
+
+	/*
+	 * Everything from here is static functionality
+	 */
+
+	public const TABLE_NAME = "companies";
+	public const TABLE_COLUMNS = array(
+		"name " . DB::STRING_TYPE,
+	);
 
 	static function __constructStatic() {
 		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS);

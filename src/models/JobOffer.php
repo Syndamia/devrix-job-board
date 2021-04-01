@@ -6,14 +6,6 @@ include_once("Company.php");
  * Model that contains the required JobOffer properties. It also contains the request methods to the job_offers table.
  */
 class JobOffer extends DBModel {
-	public const TABLE_NAME = "job_offers";
-	public const TABLE_COLUMNS = array(
-		"title " . DB::STRING_TYPE,
-		"description " . DB::STRING_TYPE,
-		"companyId " . DB::INTEGER_TYPE, // Requires a foreign key
-		"salary " . DB::FLOAT_TYPE,
-	);
-
 	public string $title;
 	public string $description;
 	public int $companyId;
@@ -25,6 +17,18 @@ class JobOffer extends DBModel {
 		$this->companyId = $companyId;
 		$this->salary = $salary;
 	}
+
+	/*
+	 * Everything from here is static functionality
+	 */
+
+	public const TABLE_NAME = "job_offers";
+	public const TABLE_COLUMNS = array(
+		"title " . DB::STRING_TYPE,
+		"description " . DB::STRING_TYPE,
+		"companyId " . DB::INTEGER_TYPE, // Requires a foreign key
+		"salary " . DB::FLOAT_TYPE,
+	);
 
 	static function __constructStatic() {
 		$foreignKeys = array(
