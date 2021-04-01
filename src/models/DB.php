@@ -43,4 +43,22 @@ class DB {
 
 		return $sth->fetchAll(PDO::FETCH_OBJ);
 	}
+
+	function insertValue(string $tableName, ...$values) {
+		$query = "INSERT INTO {$tableName} VALUES(NULL, ";
+
+		foreach($values as $value) {
+			if (gettype($value) == "string") {
+				$query .= "'{$value}', ";
+			}
+			else {
+				$query .= "{$value}, ";
+			}
+		}
+		$query = rtrim($query, ", ");
+
+		$query .= ");";
+
+		$this->connection->exec($query);
+	}
 }

@@ -25,4 +25,8 @@ class JobOffer extends DBModel {
 	static function getAll() {
 		return self::$DB->getAllValues(self::TABLE_NAME);
 	}
+
+	static function insertInDB(JobOffer $jb) {
+		self::$DB->insertValue(self::TABLE_NAME, $jb->title, $jb->description, $jb->company, $jb->salary);
+	}
 }
