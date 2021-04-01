@@ -1,25 +1,36 @@
 <?php
 include_once("DBModel.php");
+include_once("Company.php");
 
 /**
  * Model that contains the required JobOffer properties. It also contains the request methods to the job_offers table.
  */
 class JobOffer extends DBModel {
 	public const TABLE_NAME = "job_offers";
-	public const TABLE_COLUMNS = array("title " . DB::STRING_TYPE, "description " . DB::STRING_TYPE, "company " . DB::STRING_TYPE, "salary " . DB::FLOAT_TYPE);
+	public const TABLE_COLUMNS = array(
+		"title " . DB::STRING_TYPE,
+		"description " . DB::STRING_TYPE,
+		"companyId " . DB::INTEGER_TYPE, // Requires a foreign key
+		"salary " . DB::FLOAT_TYPE,
+	);
 
 	public string $title;
 	public string $description;
-	public string $company;
+	public int $companyId;
 	public float $salary;
 
-	function __construct(string $title, string $description, string $company, float $salary) {
+	function __construct(string $title, string $description, int $companyId, float $salary) {
 		$this->title = $title;
 		$this->description = $description;
-		$this->company = $company;
+		$this->companyId = $companyId;
 		$this->salary = $salary;
+	}
 
-		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS);
+	static function __constructStatic() {
+		$foreignKeys = array(
+			DB::genFK("companyId", Company::TABLE_NAME, "id")
+		);
+		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS, $foreignKeys);
 	}
 
 	/* Create */
@@ -74,3 +85,5 @@ class JobOffer extends DBModel {
 		self::$DB->deleteById(self::TABLE_NAME, $id);
 	}
 }
+
+JobOffer::__constructStatic();
