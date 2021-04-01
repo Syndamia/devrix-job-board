@@ -37,6 +37,13 @@ class DB {
 		$this->connection->exec($query);
 	}
 
+	function getById(string $tableName, int $id) {
+		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}` WHERE id = {$id}");
+		$sth->execute();
+
+		return $sth->fetch(PDO::FETCH_OBJ);
+	}
+
 	function getAllValues(string $tableName) {
 		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
 		$sth->execute();

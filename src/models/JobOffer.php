@@ -20,13 +20,20 @@ class JobOffer extends DBModel {
 	}
 
 	/**
+	 * @return JobOffer
+	 */
+	static function getFromDBById(int $id) {
+		return self::$DB->getById(self::TABLE_NAME, $id);
+	}
+
+	/**
 	 * @return JobOffer[]
 	 */
-	static function getAll() {
+	static function getAllFromDB() {
 		return self::$DB->getAllValues(self::TABLE_NAME);
 	}
 
-	static function insertInDB(JobOffer $jb) {
+	static function insertIntoDB(JobOffer $jb) {
 		self::$DB->insertValue(self::TABLE_NAME, $jb->title, $jb->description, $jb->company, $jb->salary);
 	}
 }
