@@ -13,12 +13,12 @@ class Company extends DBModel {
 	 */
 
 	public const TABLE_NAME = "companies";
-	public const TABLE_COLUMNS = array(
-		"name " . DB::STRING_TYPE,
-	);
 
 	static function __constructStatic() {
-		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS);
+		$columns = array(
+			"name " . DB::STRING_TYPE,
+		);
+		self::$DB->createTable(self::TABLE_NAME, $columns);
 	}
 
 	/* Create */

@@ -23,18 +23,18 @@ class JobOffer extends DBModel {
 	 */
 
 	public const TABLE_NAME = "job_offers";
-	public const TABLE_COLUMNS = array(
-		"title " . DB::STRING_TYPE,
-		"description " . DB::STRING_TYPE,
-		"companyId " . DB::INTEGER_TYPE, // Requires a foreign key
-		"salary " . DB::FLOAT_TYPE,
-	);
 
 	static function __constructStatic() {
+		$columns = array(
+			"title " . DB::STRING_TYPE,
+			"description " . DB::STRING_TYPE,
+			"companyId " . DB::INTEGER_TYPE, // Requires a foreign key
+			"salary " . DB::FLOAT_TYPE,
+		);
 		$foreignKeys = array(
 			DB::genFK("companyId", Company::TABLE_NAME, "id")
 		);
-		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS, $foreignKeys);
+		self::$DB->createTable(self::TABLE_NAME, $columns, $foreignKeys);
 	}
 
 	/* Create */
