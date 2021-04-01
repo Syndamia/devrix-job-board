@@ -18,4 +18,11 @@ class JobOffer extends DBModel {
 
 		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS);
 	}
+
+	/**
+	 * @return JobOffer[]
+	 */
+	static function getAll() {
+		return self::$DB->getAllValues(self::TABLE_NAME);
+	}
 }
