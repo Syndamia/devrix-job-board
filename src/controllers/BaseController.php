@@ -1,5 +1,5 @@
 <?php
-abstract class BaseController {
+class BaseController {
 	public static function invoke() {
 		switch ($_SERVER["REQUEST_METHOD"]) {
 			case "POST": 
@@ -17,11 +17,20 @@ abstract class BaseController {
 		}
 	}
 
-	abstract protected static function get();
+	protected static function get() {
+		echo "GET method not implemented!";
+	}
 
-	abstract protected static function post();
+	protected static function post() {
 
-	abstract protected static function put();
+		echo "POST method not implemented!";
+	}
 
-	abstract protected static function delete();
+	protected static function put() {
+		echo "PUT method not implemented!";
+	}
+
+	protected static function delete() {
+		echo "DELETE method not implemented!";
+	}
 }

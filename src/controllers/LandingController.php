@@ -7,13 +7,4 @@ class LandingController extends BaseController {
 		$jobs = JobOffer::getAllFromDB();
 		include "views/landing.php";
 	}
-
-	protected static function post() {
-	}
-
-	protected static function put() {
-	}
-
-	protected static function delete() {
-	}
 }
