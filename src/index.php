@@ -17,4 +17,6 @@
 	JobOffer::updateFromDB($gottenjb);
 	$secgot = JobOffer::getFromDBById(1);
 	echo $secgot->title;
+
+	JobOffer::deleteFromDB(3);
 ?>

@@ -12,8 +12,13 @@ class DB {
 	private PDO $connection;
 
 	function __construct() {
-		$this->connection = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
-		$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		try {
+			$this->connection = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
+			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		}
+		catch (PDOException $e) {
+			echo "[DB Exception]: " . $e->getMessage();
+		}
 
 		// Make sure the actual db exists
 		$createDBQuery = "CREATE DATABASE IF NOT EXISTS " . self::$dbname . ";";
@@ -36,7 +41,12 @@ class DB {
 
 		$query .= "PRIMARY KEY (id));";
 
-		$this->connection->exec($query);
+		try {
+			$this->connection->exec($query);
+		}
+		catch (PDOException $e) {
+			echo "[DB Exception]: " . $e->getMessage();
+		}
 	}
 
 	function insertValue(string $tableName, ...$values) {
@@ -54,7 +64,12 @@ class DB {
 
 		$query .= ");";
 
-		$this->connection->exec($query);
+		try {
+			$this->connection->exec($query);
+		}
+		catch (PDOException $e) {
+			echo "[DB Exception]: " . $e->getMessage();
+		}
 	}
 
 	/* Read */
@@ -84,8 +99,23 @@ class DB {
 		$query = rtrim($query, ", ");
 
 		$query .= " WHERE id = {$id};";
-		echo $query;
 
-		$this->connection->exec($query);
+		try {
+			$this->connection->exec($query);
+		}
+		catch (PDOException $e) {
+			echo "[DB Exception]: " . $e->getMessage();
+		}
+	}
+
+	/* Delete */
+
+	function deleteById(string $tableName, int $id) {
+		try {
+			$this->connection->exec("DELETE FROM {$tableName} WHERE id = {$id}");
+		}
+		catch (PDOException $e) {
+			echo "[DB Exception]: " . $e->getMessage();
+		}
 	}
 }

@@ -50,7 +50,12 @@ class JobOffer extends DBModel {
 	 * @param JobOffer $jb
 	 */
 	static function updateFromDB($jb) {
-		echo "here";
 		self::$DB->updateById(self::TABLE_NAME, $jb->id, "title", $jb->title, "description", $jb->description, "company", $jb->company, "salary", $jb->salary);
+	}
+
+	/* Delete */
+
+	static function deleteFromDB(int $id) {
+		self::$DB->deleteById(self::TABLE_NAME, $id);
 	}
 }
