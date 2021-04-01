@@ -24,6 +24,8 @@ class DB {
 		$this->connection->exec("USE " . self::$dbname);
 	}
 
+	/* Create */
+
 	function createTable(string $tableName, array $columns) {
 		$query = "CREATE TABLE IF NOT EXISTS {$tableName}(
 				  id INT NOT NULL AUTO_INCREMENT,";
@@ -35,20 +37,6 @@ class DB {
 		$query .= "PRIMARY KEY (id));";
 
 		$this->connection->exec($query);
-	}
-
-	function getById(string $tableName, int $id) {
-		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}` WHERE id = {$id}");
-		$sth->execute();
-
-		return $sth->fetch(PDO::FETCH_OBJ);
-	}
-
-	function getAllValues(string $tableName) {
-		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
-		$sth->execute();
-
-		return $sth->fetchAll(PDO::FETCH_OBJ);
 	}
 
 	function insertValue(string $tableName, ...$values) {
@@ -65,6 +53,38 @@ class DB {
 		$query = rtrim($query, ", ");
 
 		$query .= ");";
+
+		$this->connection->exec($query);
+	}
+
+	/* Read */
+
+	function getById(string $tableName, int $id) {
+		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}` WHERE id = {$id}");
+		$sth->execute();
+
+		return $sth->fetch(PDO::FETCH_OBJ);
+	}
+
+	function getAllValues(string $tableName) {
+		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
+		$sth->execute();
+
+		return $sth->fetchAll(PDO::FETCH_OBJ);
+	}
+
+	/* Update */
+
+	function updateById(string $tableName, int $id, ...$values) {
+		$query = "UPDATE {$tableName} SET ";
+
+		for ($i = 0; $i < sizeof($values); $i += 2) {
+			$query .= "{$values[$i]} = " . (gettype($values[$i+1]) == "string" ? "'{$values[$i+1]}'" : $values[$i+1]) . ", ";
+		}
+		$query = rtrim($query, ", ");
+
+		$query .= " WHERE id = {$id};";
+		echo $query;
 
 		$this->connection->exec($query);
 	}

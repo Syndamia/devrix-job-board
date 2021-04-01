@@ -19,6 +19,17 @@ class JobOffer extends DBModel {
 		self::$DB->createTable(self::TABLE_NAME, self::TABLE_COLUMNS);
 	}
 
+	/* Create */
+
+	/**
+	 * @param JobOffer $jb
+	 */
+	static function insertIntoDB($jb) {
+		self::$DB->insertValue(self::TABLE_NAME, $jb->title, $jb->description, $jb->company, $jb->salary);
+	}
+
+	/* Read */
+
 	/**
 	 * @return JobOffer
 	 */
@@ -33,7 +44,13 @@ class JobOffer extends DBModel {
 		return self::$DB->getAllValues(self::TABLE_NAME);
 	}
 
-	static function insertIntoDB(JobOffer $jb) {
-		self::$DB->insertValue(self::TABLE_NAME, $jb->title, $jb->description, $jb->company, $jb->salary);
+	/* Update */
+
+	/**
+	 * @param JobOffer $jb
+	 */
+	static function updateFromDB($jb) {
+		echo "here";
+		self::$DB->updateById(self::TABLE_NAME, $jb->id, "title", $jb->title, "description", $jb->description, "company", $jb->company, "salary", $jb->salary);
 	}
 }
