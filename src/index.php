@@ -4,6 +4,6 @@
 
 	$jb = new JobOffer("a", "", "", 0);
 	foreach(JobOffer::getAll() as $key => $obj) {
-		echo $obj->salary . "<br>";
+		echo $obj->id . "<br>";
 	}
 ?>
