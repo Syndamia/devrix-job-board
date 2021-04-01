@@ -33,6 +33,13 @@ class DB {
 		$this->connection->exec("USE " . self::$dbname);
 	}
 
+	/**
+	 * @return string
+	 */
+	static function genFK(string $currentColumn, string $foreignTable, string $foreignColumn) {
+		return "CONSTRAINT fk_{$currentColumn}_{$foreignTable} FOREIGN KEY ({$currentColumn}) REFERENCES {$foreignTable}($foreignColumn)";
+	}
+
 	/* Create */
 
 	/**
@@ -43,16 +50,28 @@ class DB {
 	 * Represents the column information. Each value must be like: "column_name data_type", where the data_type should be taken
 	 * from the constant values of DB class.
 	 * Example value: array("first_name " . DB::STRING_TYPE, "age " . DB::INTEGER_TYPE, "income " . DB::FLOAT_TYPE)
+	 *
+	 * @param string[] $foreignKeys - OPTIONAL
+	 * Represents the foreign keys. All foreign keys **MUST** be generated the the static DB method genFK.
+	 * Example value: array(DB::genFK("jobId", "jobs", "id"), DB::genFK("cityId", "cities", "id"))
 	 */
-	function createTable(string $tableName, array $columns) {
+	function createTable(string $tableName, array $columns, array $foreignKeys = null) {
 		$query = "CREATE TABLE IF NOT EXISTS {$tableName}(
-				  id INT NOT NULL AUTO_INCREMENT,";
+				  id INT NOT NULL AUTO_INCREMENT, ";
 
 		foreach ($columns as $column) {
-			$query .= "{$column},";
+			$query .= "{$column}, ";
 		}
 
-		$query .= "PRIMARY KEY (id));";
+		$query .= "PRIMARY KEY (id), ";
+
+		foreach ($foreignKeys as $fk) {
+			$query .= "{$fk}, ";
+		}
+
+		$query = rtrim($query, ", ");
+		$query .= ");";
+		echo $query;
 
 		try {
 			$this->connection->exec($query);
