@@ -1,6 +1,4 @@
 <?php
-include_once("JobOffer.php");
-
 class DB {
 	private static $servername = "localhost";
 	private static $username = "root";
@@ -11,34 +9,19 @@ class DB {
 	public const FLOAT_TYPE = "DOUBLE(16,4)";
 	public const INTEGER_TYPE = "INT";
 
-	private $connection;
+	private PDO $connection;
 
 	function __construct() {
-		$this->connection = mysqli_connect(self::$servername, self::$username, self::$password);
-
-		if (!$this->connection) {
-			die(mysqli_connect_error());
-		}
+		$this->connection = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
+		$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// Make sure the actual db exists
 		$createDBQuery = "CREATE DATABASE IF NOT EXISTS " . self::$dbname . ";";
 
-		if (!mysqli_query($this->connection, $createDBQuery)) {
-			die(mysqli_error($this->connection));
-		}
+		$this->connection->exec($createDBQuery);
 
 		// Make the actual connection to the database
-		mysqli_select_db($this->connection, self::$dbname);
-
-		$this->createTables();
-	}
-
-	private function createTables() {
-		$this->createTable(JobOffer::TABLE_NAME, JobOffer::TABLE_COLUMNS);
-	}
-
-	function __destruct() {
-		mysqli_close($this->connection);
+		$this->connection->exec("USE " . self::$dbname);
 	}
 
 	function createTable(string $tableName, array $columns) {
@@ -51,8 +34,13 @@ class DB {
 
 		$query .= "PRIMARY KEY (id));";
 
-		if (!mysqli_query($this->connection, $query)) {
-			die(mysqli_error($this->connection));
-		}
+		$this->connection->exec($query);
+	}
+
+	function getAllValues(string $tableName) {
+		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
+		$sth->execute();
+
+		return $sth->fetchAll(PDO::FETCH_OBJ);
 	}
 }
