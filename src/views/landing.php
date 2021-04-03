@@ -2,7 +2,7 @@
 
 <?php
 	foreach($jobs as $job) {
-		echo "{$job->id} {$job->title}<br>";
+		echo "{$job->title} {$job->description} " . self::$companies[$job->companyId] . " {$job->salary}<br>";
 	}
 ?>
 

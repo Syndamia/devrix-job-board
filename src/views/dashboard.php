@@ -1,6 +1,6 @@
 <?php
 	foreach($jobs as $job) {
-		echo "{$job->id} {$job->title}
+		echo "{$job->id} {$job->title} {$job->description} " . self::$companies[$job->companyId] . " {$job->salary}
 			  <form method=\"post\">
 			      <input type=\"hidden\" name=\"_method\" value=\"get\">
 			      <input type=\"hidden\" name=\"jobId\" value=\"{$job->id}\">
