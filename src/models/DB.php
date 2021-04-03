@@ -92,12 +92,10 @@ class DB {
 		$query = "INSERT INTO {$tableName} VALUES(NULL, ";
 
 		foreach($values as $value) {
-			if (gettype($value) == 'string') {
+			if (gettype($value) == 'string')
 				$query .= "'{$value}', ";
-			}
-			else {
+			else
 				$query .= "{$value}, ";
-			}
 		}
 		$query = rtrim($query, ', ');
 
@@ -146,7 +144,14 @@ class DB {
 		$query = "UPDATE {$tableName} SET ";
 
 		for ($i = 0; $i < sizeof($values); $i += 2) {
-			$query .= "{$values[$i]} = " . (gettype($values[$i+1]) == 'string' ? "'{$values[$i+1]}'" : $values[$i+1]) . ', ';
+			$query .= "{$values[$i]} = ";
+
+			if (gettype($values[$i+1]) == 'string')
+				$query .= "'{$values[$i+1]}'";
+			else 
+				$query .= $values[$i+1];
+
+			$query .= ', ';
 		}
 		$query = rtrim($query, ', ');
 
