@@ -1,17 +1,21 @@
-input[type="submit"], input[type="text"], input[type="password"] {
+input, textarea, select {
   background: none;
   color: black;
   border: 1px solid black;
   padding: 0.3em;
+  margin: 0.5em 0;
 }
 
-input[type="submit"] {
+input, textarea, select {
   width: 100%;
 }
 
-input[type="text"], input[type="password"] {
-  margin: 0.5em 0;
+input:not([type="submit"]) {
   min-width: 15em;
+}
+
+textarea {
+  resize: vertical;
 }
 
 .centered-form {
