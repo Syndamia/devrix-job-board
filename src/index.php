@@ -17,6 +17,18 @@
 			<h1 class="site-title"><a href="/">Job Offers</a></h2>
 		</header>
 
+		<nav class="site-nav">
+			<div class="job-card">
+				<a href="/">Home</a>
+			</div>
+			<div class="job-card">
+				<a href="/CreateOffer">Create a new job offer</a>
+			</div>
+			<div class="job-card">
+				<a href="/Dashboard">Dashboard</a>
+			</div>
+		</nav>
+
 		<?php
 			include_once("controllers/LandingController.php");
 			include_once("controllers/CreateOfferController.php");
@@ -49,11 +61,7 @@
 		?>
 
 		<footer class="site-footer">
-			<p>Copyright 2020 | Developer links: 
-				<a href="/Dashboard">Dashboard</a>,
-				<a href="/">Home</a>,
-				<a href="/single.html">Single</a>
-			</p>
+			<p>Copyright 2020</p>
 		</footer>
 	</div>
 
