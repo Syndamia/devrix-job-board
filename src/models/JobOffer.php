@@ -45,7 +45,7 @@ class JobOffer extends DBModel {
 	 * @param JobOffer $jb
 	 */
 	static function insertIntoDB($jb) {
-		self::$DB->insertValue(self::TABLE_NAME, $jb->title, $jb->description, $jb->company, $jb->salary);
+		self::$DB->insertValue(self::TABLE_NAME, $jb->title, $jb->description, $jb->companyId, $jb->salary);
 	}
 
 	/* Read */

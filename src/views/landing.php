@@ -5,3 +5,5 @@
 		echo "{$job->id} {$job->title}<br>";
 	}
 ?>
+
+<a href="/CreateOffer">Create a new Job Offer</a>

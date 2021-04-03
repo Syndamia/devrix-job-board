@@ -9,7 +9,11 @@
 	<br>
 	<label for="company">Company: </label>
 	<select name="company">
-		<option>Test</option>
+		<?php 
+			foreach(self::$companies as $company) {
+				echo "<option value=\"{$company->id}\">{$company->name}</option>";
+			}
+		?>
 	</select>
 	<br>
 	<label for="salary">Salary: </label>
