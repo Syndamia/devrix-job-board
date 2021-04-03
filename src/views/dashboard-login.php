@@ -1,13 +1,13 @@
-<form method="post">
-	<label for="username">Username: </label>
-	<input type="text" name="username">
-	<br>
-	<label for="password">Password</label>
-	<input type="password" name="password">
-	<br>
-	<input type="submit" value="Login">
-</form>
-<?php
-	echo self::$message;
-?>
-<a href="/">&lt; Back</a>
+<div class="job-card">
+	<form class="centered-form blocky-form-items" method="post">
+		<label for="username">Username</label>
+		<input type="text" name="username">
+		<label for="password">Password</label>
+		<input type="password" name="password">
+		<br>
+		<?php
+			echo self::$message;
+		?>
+		<input type="submit" value="Login">
+	</form>
+	</div>
