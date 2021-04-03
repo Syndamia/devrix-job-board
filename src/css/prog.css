@@ -11,7 +11,7 @@ input, textarea, select {
 }
 
 input:not([type="submit"]) {
-  min-width: 15em;
+  min-width: 20em;
 }
 
 textarea {
