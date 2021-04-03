@@ -19,6 +19,13 @@ class Company extends DBModel {
 			'name ' . DB::STRING_TYPE,
 		);
 		self::$DB->createTable(self::TABLE_NAME, $columns);
+
+		// Since there is no real way to add companies, this serves as the only official way.
+		if (sizeof(self::getAllFromDB()) == 0) {
+			self::insertIntoDB(new Company("MegaCorp"));
+			self::insertIntoDB(new Company("Cool INC."));
+			self::insertIntoDB(new Company("Company Awesome Ltd."));
+		}
 	}
 
 	/* Create */
