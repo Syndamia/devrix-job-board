@@ -64,8 +64,6 @@ There are also a few custom stylings I had to make, all located in [`prog.css`](
 - form and input styling
 - pages that have only a form inside them (for example, the [`create offer`](https://github.com/Syndamia/devrix-job-board/blob/main/src/views/create-offer.php) page)
 
-**Note**: on the landing page, job offers have a picture to the right side of them. This is by design, since the template originally had them and without them, the job offers look weird/bad. There is no functinality behind them, they're static and purely aesthetical.
-
 ## Tools
 
 This repo contains some tools that could be useful during setup and development of the app. They're all located in the `tools` folder.
