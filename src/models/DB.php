@@ -117,7 +117,7 @@ class DB {
 	 * Returns the next value that has the given id.
 	 */
 	function getById(string $tableName, int $id) {
-		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}` WHERE id = {$id}");
+		$sth = $this->connection->prepare("SELECT * FROM {$tableName} WHERE id = {$id}");
 		$sth->execute();
 
 		return $sth->fetch(PDO::FETCH_OBJ);
@@ -127,7 +127,7 @@ class DB {
 	 * Returns all values inside a table.
 	 */
 	function getAllValues(string $tableName) {
-		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
+		$sth = $this->connection->prepare("SELECT * FROM {$tableName}");
 		$sth->execute();
 
 		return $sth->fetchAll(PDO::FETCH_OBJ);
