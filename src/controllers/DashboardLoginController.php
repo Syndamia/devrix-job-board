@@ -15,10 +15,8 @@ class DashboardLoginController extends BaseController {
 			DashboardController::invoke();
 		}
 		else if ($_POST['username'] == "admin" && $_POST['password'] == "admin") {
-			// Probably a bad practice, but couldn't find if it is
-			$_SERVER['REQUEST_METHOD'] = "GET";
 			// Load normal dashboard
-			DashboardController::invoke();
+			DashboardController::get();
 		}
 		else {
 			self::$message = "Bad credentials!";
