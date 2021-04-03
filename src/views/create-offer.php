@@ -1,5 +1,3 @@
-<p>Works</p>
-
 <form method="post">
 	<label for="title">Job Title: </label>
 	<input type="text" name="title">
@@ -21,3 +19,4 @@
 	<br>
 	<input type="submit" value="Submit">
 </form>
+<a href="/">&lt; Back</a>

@@ -10,3 +10,4 @@
 <?php
 	echo self::$message;
 ?>
+<a href="/">&lt; Back</a>
