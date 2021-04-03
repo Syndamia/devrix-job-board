@@ -16,6 +16,9 @@ class DashboardController extends BaseController {
 	}
 
 	public static function post() {
+		// Forms can only send POST or GET requests.
+		// EditOfferController doesn't have it's own URI, so we can't send a request.
+		// We also can't just invoke it, because that means manually changing the server's request method.
 		switch($_POST['_method']) {
 			case 'get':
 				EditOfferController::get();

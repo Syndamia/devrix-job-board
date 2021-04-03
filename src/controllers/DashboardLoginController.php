@@ -10,6 +10,9 @@ class DashboardLoginController extends BaseController {
 	}
 
 	public static function post() {
+		// The dashboard(controller) doesn't have it's own URI (and all requests are sent in this controller), so
+		// we can't send a request directly to dashboard.
+		// This does compromise security, but for now it will have to do.
 		if (isset($_POST['_method'])) {
 			DashboardController::invoke();
 		}

@@ -1,5 +1,9 @@
 <?php
 class BaseController {
+	/**
+	 * Calls the get, post, put or delete static methods, depending on the server request method ($_SERVER['REQUEST_METHOD'])
+	 * **By default** all requests that are not POST, PUT or DELETE execute the GET request method
+	 */
 	public static function invoke() {
 		switch ($_SERVER['REQUEST_METHOD']) {
 			case 'POST': 
