@@ -33,21 +33,21 @@ Password: admin
 
 2. You'll need to update the source code with your `MySQL` credentials. In the file `src/models/DB.php`, on lines 6 to 9 you'll find the connection information. You'll need to change the values of `$username` and `$password` with your own.
    - If you're connecting to a remote database or have your database at a non-standart port, you'll also need to change `$servername`. Changing the value of `$dbname` is completely up to preference.
-   - Don't worry if the database doesn't exist, when the app starts it automatically creates the database and tables if they don't exist.
+   - Don't worry if the database or tables don't exist, when the app starts it automatically create them.
 
 3. Currently this repo provides an Apache configuration file (`configs/devrix-job-board.conf`) with the localhost domain `djb.local`.
-   - To use that domain, you'll also need to open your `/etc/hosts` file and add, on a new line, `127.0.0.1	djb.local`. **Be ware**, it will break any other localhost domains you've setup.
-   - If you wanna use it in a server-hosted environment, update the values of `ServerName` and `ServerAlias` with your desired domain and subdomain.
+   - To use that domain, you'll also need to open your `/etc/hosts` file and add, on a new line, `127.0.0.1	djb.local`. **Beware**, it will break any other localhost domains you've setup.
+   - If you wanna use it in a server environment, update the values of `ServerName` and `ServerAlias` with your desired domain and subdomain.
 
 4. Finally, we'll need to move the source code to the `/var/www/devrix-job-board/` folder.
-   - This (and creating the folder if it doesn't exist) can be done automatically, just run with sudo the `move-to-www.sh`:
+   - This (and creating the folder if it doesn't exist) can be done automatically, just run with sudo the `move-to-www.sh` script:
      ```
      sudo ./tools/move-to-www.sh
      ```
 
 ## Structure
 
-This section serves pretty much as the documentation of the overall project.
+This section serves as a mini-documentation of the overall project.
 
 ### Back-end
 
@@ -57,7 +57,7 @@ The database has two tables: `companies` and `job_offers`. Inside `companies` is
 
 ### Front-end
 
-The front-end is a modified version of the given [template](https://github.com/xavortm/html-template-jobs). I took the CSS and the structure of the HTML files and applied it as closely to the original as I can.
+The front-end is a modified version of the given [template](https://github.com/xavortm/html-template-jobs). I took the CSS and the structure of the HTML files and applied it to my structure, trying to leave behind as little as possible.
 
 There are also a few custom stylings I had to make, all located in [`prog.css`](https://github.com/Syndamia/devrix-job-board/blob/main/src/css/prog.css). These are mainly:
 - a navigation bar
