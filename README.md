@@ -38,7 +38,7 @@ Password: admin
 
 ## Structure
 
-This section serves pretty much as a small documentatino of the overall project.
+This section serves pretty much as the documentation of the overall project.
 
 ### Back-end
 
