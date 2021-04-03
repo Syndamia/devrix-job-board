@@ -1,4 +1,4 @@
-<?php require "document-top.php"; ?>
+<?php require "document-top.html"; ?>
 
 <?php
 include_once("controllers/LandingController.php");
@@ -31,4 +31,4 @@ switch ($request) {
 }
 ?>
 
-<?php require "document-bot.php"; ?>
+<?php require "document-bot.html"; ?>
