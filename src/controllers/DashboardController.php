@@ -10,13 +10,16 @@ class DashboardController extends BaseController {
 	}
 
 	public static function post() {
-		if ($_POST['_method'] == "put") {
-			$_SERVER['REQUEST_METHOD'] = "PUT";
-			EditOfferController::invoke();
-		}
-		else if ($_POST['_method'] == "delete") {
-			$_SERVER['REQUEST_METHOD'] = "DELETE";
-			EditOfferController::invoke();
+		switch($_POST['_method']) {
+			case "get":
+				EditOfferController::get();
+				break;
+			case "put":
+				EditOfferController::put();
+				break;
+			case "delete":
+				EditOfferController::delete();
+				break;
 		}
 	}
 }
