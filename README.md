@@ -13,6 +13,8 @@ Password: admin
 ## Contents
 - [Getting started](#Getting%20started)
 - [Structure](#Structure)
+  - [Back-end](#Back-end)
+  - [Front-end](#Front-end)
 - [Tools](#Tools)
 - [Issues and Future](#Issues%20and%20Future)
 
