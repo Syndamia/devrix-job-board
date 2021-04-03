@@ -2,7 +2,7 @@
 
 The repository for my solution of DevriX's exam for their internship program.
 
-It's an oversimplified job offer website, (roughly) following the MVC design pattern and using the LAMP stack (with MySQL).
+It's an oversimplified job offer website, (roughly) following the MVC design pattern and using the LAMP stack (with MySQL). In `src` you can find the source code and in `db-export` you can find the export of a very small demo database.
 
 **CREDENTIALS FOR DASHBOARD**
 ```
