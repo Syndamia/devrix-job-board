@@ -77,7 +77,7 @@ class JobOffer extends DBModel {
 	 * @param JobOffer $jb
 	 */
 	static function updateFromDB($jb) {
-		self::$DB->updateById(self::TABLE_NAME, $jb->id, "title", $jb->title, "description", $jb->description, "company", $jb->company, "salary", $jb->salary);
+		self::$DB->updateById(self::TABLE_NAME, $jb->id, "title", $jb->title, "description", $jb->description, "companyId", $jb->companyId, "salary", $jb->salary);
 	}
 
 	/* Delete */
