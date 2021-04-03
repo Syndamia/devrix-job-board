@@ -1,0 +1,11 @@
+.anchor-btn {
+  background: none;
+  border-width: 0;
+  color: black;
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.anchor-btn:hover {
+  cursor: pointer;
+}
