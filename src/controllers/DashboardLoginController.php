@@ -6,8 +6,7 @@ class DashboardLoginController extends BaseController {
 	private static $message;
 
 	public static function get() {
-		// include "views/dashboard-login.php";
-		DashboardController::invoke();
+		include "views/dashboard-login.php";
 	}
 
 	public static function post() {

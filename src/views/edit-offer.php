@@ -22,3 +22,4 @@
 	<input type="hidden" name="_method" value="put">
 	<input type="submit" value="Update">
 </form>
+<a href="/Dashboard">&lt; Back to Dashboard</a>
