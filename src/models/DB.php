@@ -3,37 +3,39 @@
  * The model that has the database functionality. DO NOT instantiate this class! If you need an instance, extend the DBModel class!
  */
 class DB {
-	private static $servername = "localhost";
-	private static $username = "root";
-	private static $password = "password";
-	private static $dbname = "devrix_job_board";
+	private static $servername = 'localhost';
+	private static $username = 'root';
+	private static $password = 'password';
+	private static $dbname = 'devrix_job_board';
 
-	public const STRING_TYPE = "VARCHAR(100)";
-	public const FLOAT_TYPE = "DOUBLE(16,4)";
-	public const INTEGER_TYPE = "INT";
+	public const STRING_TYPE = 'VARCHAR(100)';
+	public const FLOAT_TYPE = 'DOUBLE(16,4)';
+	public const INTEGER_TYPE = 'INT';
 
 	private PDO $connection;
 
 	function __construct() {
 		// Try to connect
 		try {
-			$this->connection = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
+			$this->connection = new PDO('mysql:host=' . self::$servername, self::$username, self::$password);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 
 		// Make sure the actual db exists
-		$createDBQuery = "CREATE DATABASE IF NOT EXISTS " . self::$dbname . ";";
+		$createDBQuery = 'CREATE DATABASE IF NOT EXISTS ' . self::$dbname . ';';
 
 		$this->connection->exec($createDBQuery);
 
 		// Connect to the actual database
-		$this->connection->exec("USE " . self::$dbname);
+		$this->connection->exec('USE ' . self::$dbname);
 	}
 
 	/**
+	 * Generates a foreign key string from the given parameters.
+	 *
 	 * @return string
 	 */
 	static function genFK(string $currentColumn, string $foreignTable, string $foreignColumn) {
@@ -59,24 +61,26 @@ class DB {
 		$query = "CREATE TABLE IF NOT EXISTS {$tableName}(
 				  id INT NOT NULL AUTO_INCREMENT, ";
 
+		// Create column parts of query string
 		foreach ($columns as $column) {
 			$query .= "{$column}, ";
 		}
 
-		$query .= "PRIMARY KEY (id), ";
+		// Create key(s) parts of query string
+		$query .= 'PRIMARY KEY (id), ';
 
 		foreach ($foreignKeys as $fk) {
 			$query .= "{$fk}, ";
 		}
 
-		$query = rtrim($query, ", ");
-		$query .= ");";
+		$query = rtrim($query, ', ');
+		$query .= ');';
 
 		try {
 			$this->connection->exec($query);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 
@@ -91,23 +95,23 @@ class DB {
 	function insertValue(string $tableName, ...$values) {
 		$query = "INSERT INTO {$tableName} VALUES(NULL, ";
 
+		// Create the values part of the query string
 		foreach($values as $value) {
-			if (gettype($value) == "string") {
+			// In queries, strings must be surrounded in single quotes
+			if (gettype($value) == 'string')
 				$query .= "'{$value}', ";
-			}
-			else {
+			else
 				$query .= "{$value}, ";
-			}
 		}
-		$query = rtrim($query, ", ");
+		$query = rtrim($query, ', ');
 
-		$query .= ");";
+		$query .= ');';
 
 		try {
 			$this->connection->exec($query);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 
@@ -117,7 +121,7 @@ class DB {
 	 * Returns the next value that has the given id.
 	 */
 	function getById(string $tableName, int $id) {
-		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}` WHERE id = {$id}");
+		$sth = $this->connection->prepare("SELECT * FROM {$tableName} WHERE id = {$id}");
 		$sth->execute();
 
 		return $sth->fetch(PDO::FETCH_OBJ);
@@ -127,7 +131,7 @@ class DB {
 	 * Returns all values inside a table.
 	 */
 	function getAllValues(string $tableName) {
-		$sth = $this->connection->prepare("SELECT * FROM `{$tableName}`");
+		$sth = $this->connection->prepare("SELECT * FROM {$tableName}");
 		$sth->execute();
 
 		return $sth->fetchAll(PDO::FETCH_OBJ);
@@ -145,10 +149,19 @@ class DB {
 	function updateById(string $tableName, int $id, ...$values) {
 		$query = "UPDATE {$tableName} SET ";
 
+		// Create the name = value part of query string
 		for ($i = 0; $i < sizeof($values); $i += 2) {
-			$query .= "{$values[$i]} = " . (gettype($values[$i+1]) == "string" ? "'{$values[$i+1]}'" : $values[$i+1]) . ", ";
+			$query .= "{$values[$i]} = ";
+
+			// In queries, strings must be surrounded in single quotes
+			if (gettype($values[$i+1]) == 'string')
+				$query .= "'{$values[$i+1]}'";
+			else 
+				$query .= $values[$i+1];
+
+			$query .= ', ';
 		}
-		$query = rtrim($query, ", ");
+		$query = rtrim($query, ', ');
 
 		$query .= " WHERE id = {$id};";
 
@@ -156,7 +169,7 @@ class DB {
 			$this->connection->exec($query);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 
@@ -170,7 +183,7 @@ class DB {
 			$this->connection->exec("DELETE FROM {$tableName} WHERE id = {$id}");
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 }

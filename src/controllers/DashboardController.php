@@ -12,18 +12,21 @@ class DashboardController extends BaseController {
 		foreach(Company::getAllFromDB() as $company) {
 			self::$companies[$company->id] = $company->name;
 		}
-		include "views/dashboard.php";
+		include('views/dashboard.php');
 	}
 
 	public static function post() {
+		// Forms can only send POST or GET requests.
+		// EditOfferController doesn't have it's own URI, so we can't send a request.
+		// We also can't just invoke it, because that means manually changing the server's request method.
 		switch($_POST['_method']) {
-			case "get":
+			case 'get':
 				EditOfferController::get();
 				break;
-			case "put":
+			case 'put':
 				EditOfferController::put();
 				break;
-			case "delete":
+			case 'delete':
 				EditOfferController::delete();
 				break;
 		}

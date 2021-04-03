@@ -1,5 +1,5 @@
 <?php
-include_once("models/DBModel.php");
+include_once('models/DBModel.php');
 
 class Company extends DBModel {
 	public string $name;
@@ -12,13 +12,20 @@ class Company extends DBModel {
 	 * Everything from here is static functionality
 	 */
 
-	public const TABLE_NAME = "companies";
+	public const TABLE_NAME = 'companies';
 
 	static function __constructStatic() {
 		$columns = array(
-			"name " . DB::STRING_TYPE,
+			'name ' . DB::STRING_TYPE,
 		);
 		self::$DB->createTable(self::TABLE_NAME, $columns);
+
+		// Since there is no real way to add companies, this serves as the only official way.
+		if (sizeof(self::getAllFromDB()) == 0) {
+			self::insertIntoDB(new Company("MegaCorp"));
+			self::insertIntoDB(new Company("Cool INC."));
+			self::insertIntoDB(new Company("Company Awesome Ltd."));
+		}
 	}
 
 	/* Create */

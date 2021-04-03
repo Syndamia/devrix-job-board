@@ -1,5 +1,5 @@
 <?php
-include_once("DB.php");
+include_once('DB.php');
 
 /**
  * A class, mainly for holding the static DB class intance. You can also get your model id from here.

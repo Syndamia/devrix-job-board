@@ -1,7 +1,7 @@
 <?php
-include_once("models/JobOffer.php");
+include_once('models/JobOffer.php');
 include_once('models/Company.php');
-include_once("controllers/BaseController.php");
+include_once('controllers/BaseController.php');
 
 class LandingController extends BaseController {
 	private static $companies = array();
@@ -11,6 +11,6 @@ class LandingController extends BaseController {
 		foreach(Company::getAllFromDB() as $company) {
 			self::$companies[$company->id] = $company->name;
 		}
-		include "views/landing.php";
+		include('views/landing.php');
 	}
 }

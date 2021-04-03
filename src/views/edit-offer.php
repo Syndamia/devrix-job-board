@@ -13,7 +13,7 @@
 			<?php 
 				foreach(self::$companies as $company) {
 					echo "<option value=\"{$company->id}\"";
-					echo (self::$job->companyId == $company->id ? "selected" : "") . ">{$company->name}</option>";
+					echo (self::$job->companyId == $company->id ? 'selected' : '') . ">{$company->name}</option>";
 				}
 			?>
 		</select>

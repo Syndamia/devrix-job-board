@@ -1,6 +1,6 @@
 <?php
-include_once("models/DBModel.php");
-include_once("models/Company.php");
+include_once('models/DBModel.php');
+include_once('models/Company.php');
 
 /**
  * Model that contains the required JobOffer properties. It also contains the request methods to the job_offers table.
@@ -22,17 +22,17 @@ class JobOffer extends DBModel {
 	 * Everything from here is static functionality
 	 */
 
-	public const TABLE_NAME = "job_offers";
+	public const TABLE_NAME = 'job_offers';
 
 	static function __constructStatic() {
 		$columns = array(
-			"title " . DB::STRING_TYPE,
-			"description " . DB::STRING_TYPE,
-			"companyId " . DB::INTEGER_TYPE, // Requires a foreign key
-			"salary " . DB::FLOAT_TYPE,
+			'title ' . DB::STRING_TYPE,
+			'description ' . DB::STRING_TYPE,
+			'companyId ' . DB::INTEGER_TYPE, // Requires a foreign key
+			'salary ' . DB::FLOAT_TYPE,
 		);
 		$foreignKeys = array(
-			DB::genFK("companyId", Company::TABLE_NAME, "id")
+			DB::genFK('companyId', Company::TABLE_NAME, 'id')
 		);
 		self::$DB->createTable(self::TABLE_NAME, $columns, $foreignKeys);
 	}
@@ -77,7 +77,7 @@ class JobOffer extends DBModel {
 	 * @param JobOffer $jb
 	 */
 	static function updateFromDB($jb) {
-		self::$DB->updateById(self::TABLE_NAME, $jb->id, "title", $jb->title, "description", $jb->description, "companyId", $jb->companyId, "salary", $jb->salary);
+		self::$DB->updateById(self::TABLE_NAME, $jb->id, 'title', $jb->title, 'description', $jb->description, 'companyId', $jb->companyId, 'salary', $jb->salary);
 	}
 
 	/* Delete */

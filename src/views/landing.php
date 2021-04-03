@@ -12,11 +12,6 @@
 						'. $job->description . '
 					</div>
 				</div>
-				<div class="job-logo">
-					<div class="job-logo-box">
-						<img src="https://i.imgur.com/ZbILm3F.png" alt="">
-					</div>
-				</div>
 			</li>';
 	}
 ?>
