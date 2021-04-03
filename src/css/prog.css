@@ -1,0 +1,59 @@
+input, textarea, select {
+  background: none;
+  color: black;
+  border: 1px solid black;
+  padding: 0.3em;
+  margin: 0.5em 0;
+}
+
+input, textarea, select {
+  width: 100%;
+}
+
+input:not([type="submit"]) {
+  min-width: 20em;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.centered-form {
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blocky-form-items > * {
+  display: block;
+}
+
+.anchor-btn {
+  border: none !important;
+  color: black;
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.anchor-btn:hover {
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  margin-bottom: 0.67em;
+}
+
+nav > div {
+  flex: 1;
+  text-align: center;
+  padding: 0.4em !important;
+}
+
+nav a {
+  width: 100%;
+}
+
+nav > *:not(:first-child) {
+  margin-left: 0.5em;
+}
