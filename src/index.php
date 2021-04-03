@@ -14,7 +14,7 @@
 <body>
 	<div class="site-wrapper">
 		<header class="site-header">
-			<h1 class="site-title"><a href="/">Job Offers</a></h2>
+			<h2 class="site-title"><a href="/">Job Offers</a></h2>
 		</header>
 
 		<nav class="site-nav">
