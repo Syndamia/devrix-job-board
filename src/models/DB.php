@@ -34,6 +34,8 @@ class DB {
 	}
 
 	/**
+	 * Generates a foreign key string from the given parameters.
+	 *
 	 * @return string
 	 */
 	static function genFK(string $currentColumn, string $foreignTable, string $foreignColumn) {
@@ -59,10 +61,12 @@ class DB {
 		$query = "CREATE TABLE IF NOT EXISTS {$tableName}(
 				  id INT NOT NULL AUTO_INCREMENT, ";
 
+		// Create column parts of query string
 		foreach ($columns as $column) {
 			$query .= "{$column}, ";
 		}
 
+		// Create key(s) parts of query string
 		$query .= 'PRIMARY KEY (id), ';
 
 		foreach ($foreignKeys as $fk) {
@@ -91,7 +95,9 @@ class DB {
 	function insertValue(string $tableName, ...$values) {
 		$query = "INSERT INTO {$tableName} VALUES(NULL, ";
 
+		// Create the values part of the query string
 		foreach($values as $value) {
+			// In queries, strings must be surrounded in single quotes
 			if (gettype($value) == 'string')
 				$query .= "'{$value}', ";
 			else
@@ -143,9 +149,11 @@ class DB {
 	function updateById(string $tableName, int $id, ...$values) {
 		$query = "UPDATE {$tableName} SET ";
 
+		// Create the name = value part of query string
 		for ($i = 0; $i < sizeof($values); $i += 2) {
 			$query .= "{$values[$i]} = ";
 
+			// In queries, strings must be surrounded in single quotes
 			if (gettype($values[$i+1]) == 'string')
 				$query .= "'{$values[$i+1]}'";
 			else 
