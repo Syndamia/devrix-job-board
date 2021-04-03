@@ -7,7 +7,7 @@ class CreateOfferController extends BaseController {
 
 	public static function get() {
 		self::$companies = Company::getAllFromDB();
-		include 'views/create-offer.php';
+		include('views/create-offer.php');
 	}
 
 	public static function post() {
@@ -15,7 +15,7 @@ class CreateOfferController extends BaseController {
 		JobOffer::insertIntoDB($newJobOffer);
 
 		// Redirect to landing page
-		header("Location: /", TRUE, 301);
+		header('Location: /', TRUE, 301);
 		exit();
 	}
 }

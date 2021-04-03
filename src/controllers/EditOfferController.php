@@ -11,7 +11,7 @@ class EditOfferController extends BaseController {
 	public static function get() {
 		self::$job = JobOffer::getFromDBById($_POST['jobId']);
 		self::$companies = Company::getAllFromDB();
-		include "views/edit-offer.php";
+		include('views/edit-offer.php');
 	}
 
 	public static function put() {

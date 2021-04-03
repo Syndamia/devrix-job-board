@@ -30,9 +30,9 @@
 		</nav>
 
 		<?php
-			include_once("controllers/LandingController.php");
-			include_once("controllers/CreateOfferController.php");
-			include_once("controllers/DashboardLoginController.php");
+			include_once('controllers/LandingController.php');
+			include_once('controllers/CreateOfferController.php');
+			include_once('controllers/DashboardLoginController.php');
 			
 			/* The landing page practically acts as our page router.
 			 * All request get redirected to here (look at the devrix-job-board.conf) 
@@ -42,16 +42,16 @@
 			$request = $_SERVER['REQUEST_URI'];
 			
 			switch ($request) {
-				case "":
-				case "/":
+				case '':
+				case '/':
 					LandingController::invoke();
 					break;
-				case "/CreateOffer":
-				case "/CreateOffer/":
+				case '/CreateOffer':
+				case '/CreateOffer/':
 					CreateOfferController::invoke();
 					break;
-				case "/Dashboard":
-				case "/Dashboard/":
+				case '/Dashboard':
+				case '/Dashboard/':
 					DashboardLoginController::invoke();
 					break;
 				default:

@@ -1,5 +1,5 @@
 <?php
-include_once("models/DBModel.php");
+include_once('models/DBModel.php');
 
 class Company extends DBModel {
 	public string $name;
@@ -12,11 +12,11 @@ class Company extends DBModel {
 	 * Everything from here is static functionality
 	 */
 
-	public const TABLE_NAME = "companies";
+	public const TABLE_NAME = 'companies';
 
 	static function __constructStatic() {
 		$columns = array(
-			"name " . DB::STRING_TYPE,
+			'name ' . DB::STRING_TYPE,
 		);
 		self::$DB->createTable(self::TABLE_NAME, $columns);
 	}

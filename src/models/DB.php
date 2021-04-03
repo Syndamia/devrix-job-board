@@ -3,34 +3,34 @@
  * The model that has the database functionality. DO NOT instantiate this class! If you need an instance, extend the DBModel class!
  */
 class DB {
-	private static $servername = "localhost";
-	private static $username = "root";
-	private static $password = "password";
-	private static $dbname = "devrix_job_board";
+	private static $servername = 'localhost';
+	private static $username = 'root';
+	private static $password = 'password';
+	private static $dbname = 'devrix_job_board';
 
-	public const STRING_TYPE = "VARCHAR(100)";
-	public const FLOAT_TYPE = "DOUBLE(16,4)";
-	public const INTEGER_TYPE = "INT";
+	public const STRING_TYPE = 'VARCHAR(100)';
+	public const FLOAT_TYPE = 'DOUBLE(16,4)';
+	public const INTEGER_TYPE = 'INT';
 
 	private PDO $connection;
 
 	function __construct() {
 		// Try to connect
 		try {
-			$this->connection = new PDO("mysql:host=" . self::$servername, self::$username, self::$password);
+			$this->connection = new PDO('mysql:host=' . self::$servername, self::$username, self::$password);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 
 		// Make sure the actual db exists
-		$createDBQuery = "CREATE DATABASE IF NOT EXISTS " . self::$dbname . ";";
+		$createDBQuery = 'CREATE DATABASE IF NOT EXISTS ' . self::$dbname . ';';
 
 		$this->connection->exec($createDBQuery);
 
 		// Connect to the actual database
-		$this->connection->exec("USE " . self::$dbname);
+		$this->connection->exec('USE ' . self::$dbname);
 	}
 
 	/**
@@ -63,20 +63,20 @@ class DB {
 			$query .= "{$column}, ";
 		}
 
-		$query .= "PRIMARY KEY (id), ";
+		$query .= 'PRIMARY KEY (id), ';
 
 		foreach ($foreignKeys as $fk) {
 			$query .= "{$fk}, ";
 		}
 
-		$query = rtrim($query, ", ");
-		$query .= ");";
+		$query = rtrim($query, ', ');
+		$query .= ');';
 
 		try {
 			$this->connection->exec($query);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 
@@ -92,22 +92,22 @@ class DB {
 		$query = "INSERT INTO {$tableName} VALUES(NULL, ";
 
 		foreach($values as $value) {
-			if (gettype($value) == "string") {
+			if (gettype($value) == 'string') {
 				$query .= "'{$value}', ";
 			}
 			else {
 				$query .= "{$value}, ";
 			}
 		}
-		$query = rtrim($query, ", ");
+		$query = rtrim($query, ', ');
 
-		$query .= ");";
+		$query .= ');';
 
 		try {
 			$this->connection->exec($query);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 
@@ -146,9 +146,9 @@ class DB {
 		$query = "UPDATE {$tableName} SET ";
 
 		for ($i = 0; $i < sizeof($values); $i += 2) {
-			$query .= "{$values[$i]} = " . (gettype($values[$i+1]) == "string" ? "'{$values[$i+1]}'" : $values[$i+1]) . ", ";
+			$query .= "{$values[$i]} = " . (gettype($values[$i+1]) == 'string' ? "'{$values[$i+1]}'" : $values[$i+1]) . ', ';
 		}
-		$query = rtrim($query, ", ");
+		$query = rtrim($query, ', ');
 
 		$query .= " WHERE id = {$id};";
 
@@ -156,7 +156,7 @@ class DB {
 			$this->connection->exec($query);
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 
@@ -170,7 +170,7 @@ class DB {
 			$this->connection->exec("DELETE FROM {$tableName} WHERE id = {$id}");
 		}
 		catch (PDOException $e) {
-			echo "[DB Exception]: " . $e->getMessage();
+			echo '[DB Exception]: ' . $e->getMessage();
 		}
 	}
 }
