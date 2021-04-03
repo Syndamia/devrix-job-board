@@ -12,11 +12,11 @@ Password: admin
 
 <details>
 	<summary>Screenshorts of site</summary>
-	<img href="./screenshots/landing-page.png">
-	<img href="./screenshots/create-offer.png">
-	<img href="./screenshots/dashboard-login.png">
-	<img href="./screenshots/dashboard-logged-in.png">
-	<img href="./screenshots/edit-offer.png">
+	<img src="./screenshots/landing-page.png">
+	<img src="./screenshots/create-offer.png">
+	<img src="./screenshots/dashboard-login.png">
+	<img src="./screenshots/dashboard-logged-in.png">
+	<img src="./screenshots/edit-offer.png">
 </details>
 
 ## Contents
