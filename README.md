@@ -10,6 +10,15 @@ Username: admin
 Password: admin
 ```
 
+<details>
+	<summary>Screenshorts of site</summary>
+	<img href="./screenshots/landing-page.png">
+	<img href="./screenshots/create-offer.png">
+	<img href="./screenshots/dashboard-login.png">
+	<img href="./screenshots/dashboard-logged-in.png">
+	<img href="./screenshots/edit-offer.png">
+</details>
+
 ## Contents
 - [Getting started](#Getting%20started)
 - [Structure](#Structure)
